@@ -5,4 +5,4 @@ const schema = new mongoose.Schema({
     tech:String
 });
 
-module.exports = mongoose.model('loga',schema)
+module.exports = mongoose.model('model',schema)

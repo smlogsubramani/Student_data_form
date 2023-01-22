@@ -11,10 +11,6 @@ con.on('open',function(){
     console.log("hey connection established successfully")
 })
 
-app.use(
-    express.urlencoded({ extended: true })
-);
-
 app.use(express.json());
 
 //routes individual
@@ -23,7 +19,7 @@ app.use('/admin',adminrouter)
 
 const user = require('./router/user.js')
 app.use('/user',user)
-    
+
 app.listen(9000,() => {
     console.log("server started")
 })
