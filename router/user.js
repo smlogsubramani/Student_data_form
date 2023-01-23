@@ -24,6 +24,28 @@ router.get('/:id',async(req,res)=>{
     }
 })  
 
+//patch
+router.patch('/:id',async(req,res)=>{
+ 
+    try{
+        const alien =   await model.findById(req.params.id)
+        alien.sub =  req.body.sub
+        const a2 = await alien.save()
+        res.json(a2)
+    }
+    catch{
+        res.send('error'+err)
+    }
+})
+
+//delete
+
+// router.delete('/:id',async(req,res)=>{
+//     try{
+//         const alien = await model.findById(req.params.id)
+//         alien.
+//     }
+// })
 
 //add all user
 router.post('/navin',async(req,res)=>{
