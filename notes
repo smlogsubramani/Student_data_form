@@ -1,0 +1,17 @@
+//mvc
+//model(schema ==> data fiels ==> name , technolgy , text , feedback)
+//view(frontend ==> api ==> apiendpoints)
+//controller(apiendpoint functionality)
+
+
+//routing 
+
+// -> admin acess
+// -> user access
+
+//methods
+//get   getting details
+//post  adding the details
+//put   update details
+//delete     delete the details
+

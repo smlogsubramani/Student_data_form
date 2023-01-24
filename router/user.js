@@ -6,9 +6,18 @@ const mongoose = require("mongoose")
 
 //get all the list
 router.get('/navin',async(req,res)=>{
-    try{
-        const alien = await model.find()
-        res.json(alien)
+    try{          
+        //sorting
+                // const query ={};
+                // const sort = {name:1}; // ordering by length
+                // const alien = await model.find(query).sort(sort);
+                // res.json(alien)
+
+                const alien = await model.find()
+                let sortednames = alien.sort();
+                res.send(sortednames);
+
+                
     }catch(err){
         res.send('error'+err)
     }
@@ -40,12 +49,16 @@ router.patch('/:id',async(req,res)=>{
 
 //delete
 
-// router.delete('/:id',async(req,res)=>{
-//     try{
-//         const alien = await model.findById(req.params.id)
-//         alien.
-//     }
-// })
+router.delete('/:id',async(req,res)=>{
+    try{
+        const alien = await model.findById(req.params.id)
+        // alien.name = req.body.name
+        const del = await alien.remove
+        res.json(del);
+    }catch(err){
+        res.send(err)
+    }
+})
 
 //add all user
 router.post('/navin',async(req,res)=>{
@@ -54,6 +67,7 @@ router.post('/navin',async(req,res)=>{
             name : req.body.name,
             tech : req.body.tech,
         });
+
         try{
             const aftersave = await alien.save()
             res.json(aftersave)
