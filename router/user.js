@@ -7,21 +7,45 @@ const mongoose = require("mongoose")
 //get all the list
 router.get('/navin',async(req,res)=>{
     try{          
-        //sorting
-                // const query ={};
-                // const sort = {name:1}; // ordering by length
-                // const alien = await model.find(query).sort(sort);
-                // res.json(alien)
-
                 const alien = await model.find()
-                let sortednames = alien.sort();
-                res.send(sortednames);
-
-                
+                res.send(alien);      
     }catch(err){
         res.send('error'+err)
     }
 })  
+//get by the sorted order
+router.get('/navin/sort',async(req,res)=>{
+    try{          
+                const alien = await model.find().sort()
+                res.send(alien);
+
+    }catch(err){
+        res.send('error'+err)
+    }
+})  
+//search method
+
+router.get('/navin/search',async(req,res)=>{
+    try{
+        
+        const filters = req.query;
+        const filteredUsers = data.filter(user => {
+          let isValid = true;
+          for (key in filters) {
+            console.log(key, user[key], filters[key]);
+            isValid = isValid && user[key] == filters[key];
+          }
+          return isValid;
+        });
+        res.send(filteredUsers);
+
+
+      }
+    catch(err){
+        console.log(err);
+    }
+})
+
 
 //get by id
 router.get('/:id',async(req,res)=>{
