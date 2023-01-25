@@ -23,27 +23,17 @@ router.get('/navin/sort',async(req,res)=>{
         res.send('error'+err)
     }
 })  
-//search method
+//search method by the name
 
-router.get('/navin/search',async(req,res)=>{
-    try{
-        
-        const filters = req.query;
-        const filteredUsers = data.filter(user => {
-          let isValid = true;
-          for (key in filters) {
-            console.log(key, user[key], filters[key]);
-            isValid = isValid && user[key] == filters[key];
-          }
-          return isValid;
-        });
-        res.send(filteredUsers);
-
-
-      }
-    catch(err){
-        console.log(err);
-    }
+router.get('/navin/search/:key',async(req,res)=>{
+    const search = await model.find({
+        "$or":[
+            {name:{
+                $regex:req.params.key
+            }}
+        ]
+    })
+    res.send(search);
 })
 
 
