@@ -7,8 +7,8 @@ const mongoose = require("mongoose")
 //get all the list
 router.get('/navin',async(req,res)=>{
     try{          
-                const alien = await model.find()
-                res.send(alien);      
+        const alien = await model.find()
+        res.send(alien);      
     }catch(err){
         res.send('error'+err)
     }
@@ -23,8 +23,8 @@ router.get('/navin/sort',async(req,res)=>{
         res.send('error'+err)
     }
 })  
-//search method by the name
 
+//search method by the name using prebuilt methods
 router.get('/navin/search/:key',async(req,res)=>{
     const search = await model.find({
         "$or":[
@@ -36,7 +36,6 @@ router.get('/navin/search/:key',async(req,res)=>{
     res.send(search);
 })
 
-
 //get by id
 router.get('/:id',async(req,res)=>{
     try{
@@ -47,16 +46,17 @@ router.get('/:id',async(req,res)=>{
     }
 })  
 
-//patch
-router.patch('/:id',async(req,res)=>{
+//put
+router.put('/:id',async(req,res)=>{
  
     try{
-        const alien =   await model.findById(req.params.id)
-        alien.sub =  req.body.sub
-        const a2 = await alien.save()
-        res.json(a2)
+        const alien =   await model.findById(req.param.id)
+        const update =  alien.updateOne(
+            {id :req.params.id},  {$set :{tech:req.body}})
+        console.log(req.body.name)
+        res.send("updated")
     }
-    catch{
+    catch(err){
         res.send('error'+err)
     }
 })
@@ -66,9 +66,11 @@ router.patch('/:id',async(req,res)=>{
 router.delete('/:id',async(req,res)=>{
     try{
         const alien = await model.findById(req.params.id)
-        // alien.name = req.body.name
-        const del = await alien.remove
-        res.json(del);
+        const del = alien.deleteone({
+            name : req.body
+        }
+        );
+        res.send("done")
     }catch(err){
         res.send(err)
     }
@@ -92,3 +94,5 @@ router.post('/navin',async(req,res)=>{
 })  
 
 module.exports= router
+
+
