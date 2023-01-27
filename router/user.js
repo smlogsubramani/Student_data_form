@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const model = require('../models/model.js') 
-const mongoose = require("mongoose")
+
 
 
 //get all the list
@@ -50,11 +50,12 @@ router.get('/:id',async(req,res)=>{
 router.put('/:id',async(req,res)=>{
  
     try{
-        const alien =   await model.findById(req.param.id)
-        const update =  alien.updateOne(
-            {id :req.params.id},  {$set :{tech:req.body}})
-        console.log(req.body.name)
-        res.send("updated")
+        const alien =   await model.findById(req.params.id)
+        const update = await alien.update(
+            {tech : req.body.tech}
+        )
+        
+            res.send("technology updated")
     }
     catch(err){
         res.send('error'+err)
