@@ -14,8 +14,8 @@ con.on('open',function(){
 app.use(express.json());
 
 //routes individual
-const adminrouter = require('./router/alien.js')
-app.use('/admin',adminrouter)
+const adminrouter = require('./router/login.js')
+app.use('/login',adminrouter)
 
 const user = require('./router/user.js')
 app.use('/user',user)
